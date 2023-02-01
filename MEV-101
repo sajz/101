@@ -1,8 +1,6 @@
 # MEV 360
 
 This post displays curated resources gathered through readings and conversations that would help you get started!
-Feel free to DM me if you have any interesting resources to share or any question.
-[@sajidazouarhi](https://twitter.com/sajidazouarhi) 
 
 ## Introduction material
 
@@ -15,22 +13,17 @@ A great read to get started: [Why run mev-boost?](https://writings.flashbots.net
 *Bundles*: Bundles are groups of transactions searchers submit. Those transactions must be included in the order submitted, and either the whole bundle is included, or nothing is. 
 A bundle should never be split up.
 
-*Searcher*:
-*Builders*:
-*Relay(s)*:
-*Validators*:
-
-To dive into this more, here is an overview of the trust assumptions between those actors by ladislaus.eth [here](https://mirror.xyz/ladislaus.eth/XY00FiQBunZss_SddZ7rSfYocrONdEJkM0o2NZG9Tf4#:~:text=What%20are%20searchers%2C%20builders%20and%20relays%3F).
+To read the definitions of searcher, builder, relay and validator, and get an overview of the trust assumptions between them, read [this article](https://mirror.xyz/ladislaus.eth/XY00FiQBunZss_SddZ7rSfYocrONdEJkM0o2NZG9Tf4#:~:text=What%20are%20searchers%2C%20builders%20and%20relays%3F) by ladislaus.eth. 
 
 ![diagram](https://raw.githubusercontent.com/flashbots/mev-boost/main/docs/mev-boost-integration-overview.png "MEV-Boost diagram")
 
 ### Overview of MEV strategies
 
 * Front-Running
-* Sandwich Attacks - more on this [here](blog)
+* Sandwich Attacks - more on this [here](https://medium.com/coinmonks/defi-sandwich-attack-explain-776f6f43b2fd)
 * Back-Running
 * Liquidations
-* Time-Bandit Attacks - more on this [here] blog) and if you are into podcast [here](podcast)
+* Time-Bandit Attacks - more on this [here] https://losslessdefi.medium.com/your-intro-into-time-bandit-attacks-on-eth-5a578e3ae6a4) and if you are into podcast [here](https://art19.com/shows/mapping-out-eth-20/episodes/8cbab4b1-c8d3-4d75-85a9-477f7687f03e)
 * Uncle Bandit Attack - interesting to note that the surface of MEV isn’t limited to the mempool, it extends into uncled blocks as well.
 
 
@@ -116,6 +109,6 @@ https://dune.com/ChainsightAnalytics/mev-after-ethereum-merge
 ** https://www.youtube.com/watch?v=-3LIHehjzBA	2021 ethglobal avec justin drake
 ** https://www.youtube.com/watch?v=GzuyOYiuipg	2021 cryptoeco
 
-Obviously this is not an exhaustive list so feel free to submit a PR, drop me a note here or on twitter to suggest an improvement or have a resource referenced.
+This is not an exhaustive list so feel free to submit a PR, drop me a note here or on [twitter](https://twitter.com/sajidazouarhi) to suggest an improvement or have a resource referenced.
 
 
