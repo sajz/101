@@ -1,0 +1,121 @@
+# MEV 360
+
+This post displays curated resources gathered through readings and conversations that would help you get started!
+Feel free to DM me if you have any interesting resources to share or any question.
+[@sajidazouarhi](https://twitter.com/sajidazouarhi) 
+
+## Introduction material
+
+### Why does MEV matter?
+
+A great read to get started: [Why run mev-boost?](https://writings.flashbots.net/why-run-mevboost/) by hasu and thegostep (from Flashbots).
+
+### Definitions
+
+*Bundles*: Bundles are groups of transactions searchers submit. Those transactions must be included in the order submitted, and either the whole bundle is included, or nothing is. 
+A bundle should never be split up.
+
+*Searcher*:
+*Builders*:
+*Relay(s)*:
+*Validators*:
+
+To dive into this more, here is an overview of the trust assumptions between those actors by ladislaus.eth [here](https://mirror.xyz/ladislaus.eth/XY00FiQBunZss_SddZ7rSfYocrONdEJkM0o2NZG9Tf4#:~:text=What%20are%20searchers%2C%20builders%20and%20relays%3F).
+
+![diagram](https://raw.githubusercontent.com/flashbots/mev-boost/main/docs/mev-boost-integration-overview.png "MEV-Boost diagram")
+
+### Overview of MEV strategies
+
+* Front-Running
+* Sandwich Attacks - more on this [here](blog)
+* Back-Running
+* Liquidations
+* Time-Bandit Attacks - more on this [here] blog) and if you are into podcast [here](podcast)
+* Uncle Bandit Attack - interesting to note that the surface of MEV isn’t limited to the mempool, it extends into uncled blocks as well.
+
+
+You can read more [here](https://docs.ata.network/mev/examples/)
+
+#### How does it work?
+
+*Execution client build block and consensus client propose block to the network*
+
+Beyond the first separation of concerns (Consensus layer vs Execution layer) that we are seeing in Ethereum architecture post-Merge, different roles, historically done by Eth1 clients (pre-Merge mining clients) will be externalized. An interesting example of that is the separation between block builders and block proposers (PBS). A block can be built by any independent actor (“searcher”) in a way that is more financially relevant by ordering transactions to extract maximum value from them. We call this MEV and it already represents more than 600 millions dollars since January 2020 on Ethereum.
+
+Historically, builders and validators have been the same logical entity. The introduction of Block Proposer / Builder Separation (PBS for short) to the Ethereum roadmap and the development of rollup centric data availability chains aim to separate these roles. As Vitalik describes in his Endgame post, such a separation aims to maximize validator decentralization.
+
+
+Read more on this from Mevwaifu.eth on *mev-boost, relays, self-sovereignty* [here](https://mirror.xyz/mevwaifu.eth/Xo_5rIpRQpFOC__kYfjLJVOFwlSZH2n8tUnHoXo6VyI).
+
+
+### MEV supply chain
+
+* User - The user is anyone with an intention to enact a state transition on a blockchain. 
+* Wallet - The wallet is the user interface which helps the user encode their intent into a transaction that the blockchain can understand. 
+* Searcher - Searchers have a simple job: extract all the MEV possible for themselves.
+* Builder - Builders have many names today, but their job is to aggregate transactions from various sources and construct a block. In Ethereum today, execution clients are performing the builder role. In a L2 execution system, the sequencer is the builder as they construct rollup payloads to submit to the L1.
+* Validator - Validators perform consensus duties which include validating and finalizing blocks. 
+
+
+Read [The MEV Supply Chain: a peek into the future of this industry
+](https://flashbots.mirror.xyz/bqCakwfQZkMsq63b50vib-nibo5eKai0QuK7m-Dsxpo) by thegostep.
+You can also read [MEV: An Intro to Value Extraction](https://research.thetie.io/mev-maximal-extractable-value/).
+
+## More advanced concepts
+
+### The Builder API
+It's like the Engine API but for builders.
+Here is a [post on ethresearch](https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177) that explain the design for a marketplace for block building aka Flashbots architecture - with some useful terminology and sequence diagram.
+
+### Flashbots Auction process
+
+Flashbots Auction provides a private transaction pool + a sealed bid blockspace auction mechanism which allows block proposers to trustlessly outsource the work of finding optimal block construction.
+Read more about how it works on the [flashbots documentation](https://docs.flashbots.net/flashbots-auction/overview#how-does-it-work) website.
+
+
+## Data - illuminating the Dark Forest
+
+https://inflectionvc.notion.site/Ethereum-post-merge-data-tools-66a29627f39d474ebc8c55b91f0e1785
+https://explore.flashbots.net/
+https://www.mevboost.org/
+https://mev.metablock.dev/1/dashboard
+https://mev-relays.beaconstate.info/
+https://dune.com/ChainsightAnalytics/mev-after-ethereum-merge
+
+
+## MEV - what's next?
+
+* Putting back the user in the MEV value chain - see [MEV rebate idea](https://thedefiant.io/why-mev-matters-and-other-post-merge-revelations) with Blocknative team.
+* Cross chain MEV
+** Polygon MEV - https://explore.marlin.org/ 
+** L2 MEV - https://collective.flashbots.net/t/quantifying-mev-on-l2s/450/6 
+* Multi block MEV - https://collective.flashbots.net/t/multi-block-mev/457
+* Partial block auctions - https://ethresear.ch/t/how-much-can-we-constrain-builders-without-bringing-back-heavy-burdens-to-proposers/13808
+* PBS in protocol and why? see these open problems by [RIG](https://efdn.notion.site/ROPs-RIG-Open-Problems-c11382c213f949a4b89927ef4e962adf?p=69c5885d56f84cd19da56e515e773c24&pm=s)- and this [ethresearch post](https://ethresear.ch/t/unbundling-pbs-towards-protocol-enforced-proposer-commitments-pepc/13879?u=barnabe) by Barnabe.
+
+## Other considerations 
+
+* Good MEV vs Bad MEV? Should we forbid or fight against MEV?
+* [MEV utopia vs distopia](https://flashbots.mirror.xyz/bqCakwfQZkMsq63b50vib-nibo5eKai0QuK7m-Dsxpo#:~:text=MEV%20Supply%20Chain%20%2D%20Utopia%20or%20Dystopia%3F)
+* [Destructive vs constructive MEV](https://mixbytes.io/blog/mev-defi-transaction-ordering-for-profit-fun)
+* Censorship, private order flow, vertical integration
+* [Is the Block Building market doomed to monopoly?](https://mirror.xyz/sajz.sismo.eth/WK26Itw23TFa3tsncYjarpfjHvqEJfPul0bgDPMyYd8)
+* Builder centralization [this post](https://ethresear.ch/t/how-much-can-we-constrain-builders-without-bringing-back-heavy-burdens-to-proposers/13808) - also touches on inclusion lists, and [this](https://ethresear.ch/t/block-builder-centralization/12135) shorter post.
+* [We Live In A Mempool: Backrunning the MEV Crisis](https://medium.com/dragonfly-research/we-live-in-a-mempool-backrunning-the-mev-crisis-a4ea0b493b05)
+* MEV law and regulation - see [this post](https://collective.flashbots.net/t/law-and-regulation-vs-mev-extraction/477) on flashbots forum.
+* [Preserving Block Proposer Agency with MEV-Boost using EigenLayer](https://hackmd.io/@layr/SkBRqvdC5)
+
+## Interesting material
+* Flashboys paper
+** https://threadreaderapp.com/thread/1116155236433956865.html
+** https://arxiv.org/pdf/1904.05234.pdf
+* Videos by Phil Daian
+** https://www.youtube.com/watch?v=9tRLaCE_s9w 2021 cornell
+** https://www.youtube.com/watch?v=Y0HcX4uZnnc 2022 SBC
+** https://www.youtube.com/watch?v=vhxIjEnhutw 2022 devconnect
+** https://www.youtube.com/watch?v=-3LIHehjzBA	2021 ethglobal avec justin drake
+** https://www.youtube.com/watch?v=GzuyOYiuipg	2021 cryptoeco
+
+Obviously this is not an exhaustive list so feel free to submit a PR, drop me a note here or on twitter to suggest an improvement or have a resource referenced.
+
+
